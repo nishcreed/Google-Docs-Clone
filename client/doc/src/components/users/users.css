@@ -1,0 +1,9 @@
+.userInfo {
+    width: 40px;
+    height: 40px;
+    display: -webkit-flex;
+    display: flex;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #FFF;
+  }
