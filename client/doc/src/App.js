@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Navbar,
-  NavbarBrand,
-} from 'reactstrap';
+// import {
+//   Navbar,
+//   NavbarBrand,
+//   NavLink
+// } from 'reactstrap';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import './App.css';
 import Editor from './components/editor/Editor';
 import Login from './components/login/Login';
+import Register from './components/register/Register';
+import Navbar from './components/navbar/Navbar';
+import { WS_URL } from './const';
+import Home from './components/home/Home';
 
 
 function App() {
-  const WS_URL = 'ws://127.0.0.1:3400';
-  const [username, setUsername] = useState('');
-  const { sendJsonMessage, readyState } = useWebSocket(WS_URL, {
+  // const WS_URL = 'ws://127.0.0.1:3400';
+  const [username, setUsername] = useState(null);
+  const [msg,setMsg] = useState('');
+  useWebSocket(WS_URL, {
     onOpen: () => {
       console.log('WebSocket connection established.');
     },
@@ -22,24 +29,28 @@ function App() {
     shouldReconnect: () => true
   });
 
-  useEffect(() => {
-    if(username && readyState === ReadyState.OPEN) {
-      sendJsonMessage({
-        username,
-        type: 'userevent'
-      });
-    }
-  }, [username, sendJsonMessage, readyState]);
+  // useEffect(() => {
+  //   if(creds && readyState === ReadyState.OPEN) {
+  //     sendJsonMessage({
+  //       username:creds.username,
+  //       password:creds.password,
+  //       type: 'userevent'
+  //     });
+  //   }
+  // }, [creds, sendJsonMessage, readyState]);
+
+  
 
   return (
     <>
-      <Navbar color="light" light>
-        <NavbarBrand href="/">Real-time document editor</NavbarBrand>
-      </Navbar>
-      <div className="container-fluid">
-        {username ? <Editor/>
-            : <Login onLogin={setUsername}/> }
-      </div>
+      <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home msg={msg} username={username} />} />
+        <Route path="/login" element={<Login setMsg={setMsg} msg={msg} setUname={setUsername} />} />
+        <Route path="/register" element={<Register />} /> 
+      </Routes>
+      </Router>
     </>
   );
 }
