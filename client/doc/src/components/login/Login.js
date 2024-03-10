@@ -3,35 +3,43 @@ import { useState } from 'react';
 import './login.css';
 import { WS_URL } from '../../const';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export default function Login({ setMsg,msg,setUname }) {
+export default function Login({ setUname }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [message,setMessage] = useState();
     const navigate = useNavigate();
-    const isLoginEvent = (message) => {
-      let evt = JSON.parse(message.data);
-      return evt.type === 'userevent';
-    }
-    const {sendJsonMessage, lastJsonMessage,readyState} = useWebSocket(WS_URL, {
-      share: true,
-      filter: isLoginEvent
-    });
-    const logInUser = () =>{
+    // const isLoginEvent = (message) => {
+    //   let evt = JSON.parse(message.data);
+    //   return evt.type === 'loginevent';
+    // }
+    // const {sendJsonMessage, lastJsonMessage,readyState} = useWebSocket(WS_URL, {
+    //   share: true,
+    //   filter: isLoginEvent
+    // });
+    const logInUser = () => {
       if(!username.trim() || !password.trim()) {
         return;
       }
-      if(readyState === ReadyState.OPEN){
-        sendJsonMessage({
-          username,
-          password,
-          type: 'userevent'
-        });
-        setMsg(lastJsonMessage?.data.msg);
+      axios.post('/login',{username,password})
+      .then(res => {
+        localStorage.setItem('token',res.data.token);
         setUname(username);
+        setMessage('');
         navigate('/');
-      }
+      })
+      .catch(error => {
+        console.error('Error:', error.message);
+        // Handle error
+        if (error.response.status === 401) {
+          setMessage(error.response.data.message);
+        } else {
+          console.error('Response error:', error.response.status);
+        }
+      });
     }
-    // let msg = lastJsonMessage?.data.msg || '';
+
     return (
       <div className="account">
         <div className="account__wrapper">
@@ -44,9 +52,12 @@ export default function Login({ setMsg,msg,setUname }) {
             <input required type='password' name="password" onInput={(e) => setPassword(e.target.value)} className="form-control" />
             <button
               type="button"
-              onClick={logInUser}
+              onClick={(e) => {
+                e.preventDefault();
+                logInUser();
+              }} 
               className="btn btn-primary account__btn">Log in</button><br/><br/>
-              <span style={{fontSize:'0.8rem',color:'green'}}>{msg}</span>
+              <span style={{fontSize:'0.8rem',color:'green'}}>{message}</span>
           </div>
         </div>
       </div>

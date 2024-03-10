@@ -2,18 +2,13 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 import './register.css'
 import { WS_URL } from '../../const';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 export default function Register() {
     const navigate = useNavigate();
-    const isRegisterEvent = (message) => {
-        let evt = JSON.parse(message.data);
-        return evt.type === 'register';
-    }
-    const { lastJsonMessage, sendJsonMessage } = useWebSocket(WS_URL, {
-        share: true,
-        filter: isRegisterEvent
-    });
-    let msg = lastJsonMessage?.data.msg || '';
+    const [msg,setMsg] = useState('');
+
     const handleSubmit = (e) => {
         e.preventDefault();
     
@@ -22,13 +17,16 @@ export default function Register() {
         const username = formData.get('username');
         const password = formData.get('pwd');
         
-        sendJsonMessage({
-            username,
-            email,
-            password,
-            type: 'register'
-        });
-        navigate('/');
+        axios.post('/register',{email,username,password})
+        .then(res => {
+            console.log('Registered');
+            navigate('/');
+        })
+        .catch(err => {
+            console.error(err);
+            setMsg(err.response.data.message);
+        })
+        
     }
     return (
         <form className="reg-form" onSubmit={handleSubmit}>

@@ -1,20 +1,15 @@
+import { useParams } from "react-router-dom";
 import Document from "../document/Document";
-import History from "../history/History";
-import Users from "../users/Users";
 import './editor.css';
 
-export default function Editor() {
-    return (
-      <div className="main-content">
-        <div className="document-holder">
-          <div className="currentusers">
-            <Users/>
-          </div>
-          <Document/>
-        </div>
-        <div className="history-holder">
-          <History/>
-        </div>
+export default function Editor({username}) {
+
+  const { id } = useParams();
+  return (
+    <div className="main-content">
+      <div className="document-holder">
+        <Document id={id} username={username}/>
       </div>
-    );
+    </div>
+  );
 }
