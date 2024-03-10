@@ -1,5 +1,10 @@
 # Google-Docs-Clone
 
+## Technologies
+- ReactJs
+- MongoDB
+- NodeJs
+
 ## Key Features
 - Authentication with the usage of JWT
 - Real-time collaboration with the help of operational transformation algorithm
