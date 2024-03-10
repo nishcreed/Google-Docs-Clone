@@ -1,5 +1,10 @@
 # Google-Docs-Clone
 
+## Key Features
+- Authentication with the usage of JWT
+- Real-time collaboration with the help of operational transformation algorithm
+- Presence of authorization
+
 ## How to run locally
 - Download the zip of this repo
 - Start mongo server by running ```mongod``` in a terminal
