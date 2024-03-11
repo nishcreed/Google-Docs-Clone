@@ -16,7 +16,7 @@ export default function Login({ setUname }) {
         return;
       }
       // axios.post('/login',{username,password})
-      axios.post('https://google-docs-clone-xn18.onrender.com',{username,password})
+      axios.post('https://google-docs-clone-xn18.onrender.com/login',{username,password})
       .then(res => {
         localStorage.setItem('token',res.data.token);
         setUname(username);

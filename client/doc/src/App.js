@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if(token) {
-      axios.post('/login',{token})
+      axios.post('https://google-docs-clone-xn18.onrender.com/login',{token})
       .then(res => {
         const decodedToken = jwtDecode(token);
         const username = decodedToken.username;
