@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== "production"){
+  require('dotenv').config();
+}
+
 const { WebSocket, WebSocketServer } = require('ws');
 const http = require('http');
 const uuidv4 = require('uuid').v4;
@@ -5,7 +9,7 @@ const { MongoClient, ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
 const secret_key = 'qwerty';
 
-const uri = 'mongodb://127.0.0.1:27017';
+const uri = process.env.DB_URL || 'mongodb://127.0.0.1:27017';
 const client = new MongoClient(uri);
 
 // Connect to the MongoDB server

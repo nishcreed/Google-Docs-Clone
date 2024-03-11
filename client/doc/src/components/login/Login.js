@@ -10,19 +10,13 @@ export default function Login({ setUname }) {
     const [password, setPassword] = useState('');
     const [message,setMessage] = useState();
     const navigate = useNavigate();
-    // const isLoginEvent = (message) => {
-    //   let evt = JSON.parse(message.data);
-    //   return evt.type === 'loginevent';
-    // }
-    // const {sendJsonMessage, lastJsonMessage,readyState} = useWebSocket(WS_URL, {
-    //   share: true,
-    //   filter: isLoginEvent
-    // });
+
     const logInUser = () => {
       if(!username.trim() || !password.trim()) {
         return;
       }
-      axios.post('/login',{username,password})
+      // axios.post('/login',{username,password})
+      axios.post('https://google-docs-clone-xn18.onrender.com',{username,password})
       .then(res => {
         localStorage.setItem('token',res.data.token);
         setUname(username);
