@@ -42,8 +42,8 @@ export default function Login({ setUname }) {
               <p className="account__name">Hello, user!</p>
               <p className="account__sub">Log in to create a new document or collaborate</p>
             </div>
-            <input required name="username" onInput={(e) => setUsername(e.target.value)} className="form-control" />
-            <input required type='password' name="password" onInput={(e) => setPassword(e.target.value)} className="form-control" />
+            <input required placeholder='Username' name="username" onInput={(e) => setUsername(e.target.value)} className="form-control" />
+            <input required placeholder='Password' type='password' name="password" onInput={(e) => setPassword(e.target.value)} className="form-control" />
             <button
               type="button"
               onClick={(e) => {
