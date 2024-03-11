@@ -18,3 +18,5 @@
 - In the extracted folder, open a terminal, run ```cd client/doc``` and then ```npm install```.
 - In the extracted folder, open a terminal, run ```cd server``` and then ```node app.js``` to start the server.
 - Similarily, run ```cd client/doc``` and then ```npm start``` to start the client.
+
+Link to website: [https://docsync-60db.onrender.com](https://docsync-60db.onrender.com)
