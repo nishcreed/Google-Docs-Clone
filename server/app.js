@@ -3,7 +3,7 @@ if(process.env.NODE_ENV !== "production"){
 }
 
 const { WebSocket, WebSocketServer } = require('ws');
-const https = require('https');
+const http = require('http');
 const uuidv4 = require('uuid').v4;
 const { MongoClient, ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
@@ -167,7 +167,7 @@ function handleDisconnect(userId) {
 }
 
 
-const server = https.createServer((req,res) => {
+const server = http.createServer((req,res) => {
   // Allow preflight requests
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
