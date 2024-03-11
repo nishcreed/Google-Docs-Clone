@@ -261,7 +261,7 @@ const server = http.createServer((req,res) => {
   }
 });
 const wsServer = new WebSocketServer({ server });
-const port = 3400;
+const port = process.env.PORT || 3400;
 
 server.listen(port, async () => {
   await connect();
