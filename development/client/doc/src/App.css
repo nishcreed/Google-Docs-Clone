@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Merriweather', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.header-editor {
+  background: #fff;
+  outline: none;
+  padding: 20px;
+  border: 1px solid #b3b3b1;
+}
+
+.body-editor {
+  outline: none;
+  background: #fff;
+  height: 100vh;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+
+.navbar-brand {
+  font-size: 16px;
+}
+
+.container-fluid {
+  padding: 0px;
+}
+

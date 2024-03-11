@@ -1,0 +1,31 @@
+.main-content {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 15px 50px;
+    background: #eee;
+}
+
+.document-holder {
+    flex: 1;
+}
+
+.history-holder {
+    width: 300px;
+    background: #FFF;
+    min-width: 300px;
+    margin: 80px 0px 90px 15px;
+    height: 100vh;
+    border: 1px solid #ccc;
+}
+
+.history-holder ul {
+    padding: 9px;
+    list-style: none;
+    font-size: 12px;
+    color: #4e4e4e;
+}
+
+.currentusers {
+    margin: 20px 0;
+    display: flex;
+}
