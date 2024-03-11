@@ -15,8 +15,8 @@ export default function Login({ setUname }) {
       if(!username.trim() || !password.trim()) {
         return;
       }
-      // axios.post('/login',{username,password})
-      axios.post('https://google-docs-clone-xn18.onrender.com',{username,password})
+      axios.post('/login',{username,password})
+      // axios.post('https://google-docs-clone-xn18.onrender.com',{username,password})
       .then(res => {
         localStorage.setItem('token',res.data.token);
         setUname(username);

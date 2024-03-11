@@ -17,8 +17,8 @@ export default function Register() {
         const username = formData.get('username');
         const password = formData.get('pwd');
         
-        // axios.post('/register',{email,username,password})
-        axios.post('https://google-docs-clone-xn18.onrender.com',{email,username,password})
+        axios.post('/register',{email,username,password})
+        // axios.post('https://google-docs-clone-xn18.onrender.com',{email,username,password})
         .then(res => {
             console.log('Registered');
             navigate('/');
