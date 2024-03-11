@@ -3,14 +3,14 @@ if(process.env.NODE_ENV !== "production"){
 }
 
 const { WebSocket, WebSocketServer } = require('ws');
-const http = require('http');
+const https = require('https');
 const uuidv4 = require('uuid').v4;
 const { MongoClient, ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
 const secret_key = 'qwerty';
 
-// const uri = process.env.DB_URL || 'mongodb://127.0.0.1:27017';
-const uri = 'mongodb://127.0.0.1:27017';
+const uri = process.env.DB_URL || 'mongodb://127.0.0.1:27017';
+// const uri = 'mongodb://127.0.0.1:27017';
 const client = new MongoClient(uri);
 
 // Connect to the MongoDB server
@@ -167,7 +167,7 @@ function handleDisconnect(userId) {
 }
 
 
-const server = http.createServer((req,res) => {
+const server = https.createServer((req,res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
