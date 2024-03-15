@@ -34,17 +34,16 @@ export default function Home({username}) {
     }
     return (
         <div className="home">
+            <h2 style={{textAlign:'center'}}>Documents</h2>
             <ul className='docs'>
                 {docs?.map((doc) => <li><Link to={`editor/${doc._id}`}>{doc.owner}'s {doc.docName}</Link></li>)}
             </ul>
             <br></br>
             <br></br>
-            <form style={{pointerEvents:!username?'none':'auto'}}>
-                <div class="input-group mb-3">
-                <input type="text" class="form-control"  placeholder='Enter document name' aria-label="Recipient's username" id='newDoc' aria-describedby="button-addon2"/>
-                <button onClick={newHandler} class="btn btn-primary" type="button" id="button-addon2">Create</button>
-                </div>
-            </form> 
+            <div style={{pointerEvents:!username?'none':'auto'}} class="input-group mb-3">
+            <input type="text" class="form-control"  placeholder='Enter document name' aria-label="Recipient's username" id='newDoc' aria-describedby="button-addon2"/>
+            <button onClick={newHandler} class="btn btn-primary" type="button" id="button-addon2">Create</button>
+            </div>
             
             <br></br>
             {!username && <span style={{fontSize:'0.8rem',color:'green'}}>Log in to create a new document</span>}
