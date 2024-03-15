@@ -132,12 +132,11 @@ async function handleContentChange(editorContent, id, clientOps) {
   documentStates[id].content = transformedContent;
 
   // Update the document in the database
-  const updatedDocument = await db.collection('document').findOneAndUpdate(
+  db.collection('document').findOneAndUpdate(
     { _id: new ObjectId(id) },
-    { $set: { content: transformedContent } },
-    { returnDocument: 'after' }
+    { $set: { content: transformedContent } }
   );
-  return updatedDocument.value;
+  return documentStates[id];
 }
 
 
