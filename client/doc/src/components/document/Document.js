@@ -19,17 +19,7 @@ export default function Document({id,username}) {
   useEffect(() => {
     if(lastJsonMessage) {
       setDoc(lastJsonMessage.data.doc);
-      if(doc) {
-        let elem = document.getElementById('text-editor');
-        if (cursorPosition == 0) {
-          document.getElementById('text-editor').value = doc?.content;
-          elem?.focus();
-          elem?.setSelectionRange(doc?.content.length, doc?.content.length);
-        } else {
-          elem?.focus();
-          elem?.setSelectionRange(cursorPosition, cursorPosition);
-        }
-      }
+      
     }
     else {
       sendJsonMessage({
@@ -38,6 +28,20 @@ export default function Document({id,username}) {
       })
     }
   },[lastJsonMessage])
+
+  useEffect(()=>{
+    if(doc) {
+      let elem = document.getElementById('text-editor');
+      if (cursorPosition == 0) {
+        document.getElementById('text-editor').value = doc?.content;
+        elem?.focus();
+        elem?.setSelectionRange(doc?.content.length, doc?.content.length);
+      } else {
+        elem?.focus();
+        elem?.setSelectionRange(cursorPosition, cursorPosition);
+      }
+    }
+  },[doc])
 
 
   const generateOps = (oldContent, newContent) => {
