@@ -10,6 +10,11 @@
 - Real-time collaboration with the help of operational transformation algorithm
 - Presence of authorization
 
+## Implementation of collaboration
+- For every change in editor, old content and new content are compared, the changes and operation done are found and sent to server
+- In server, transformation (OT algorithm) is done with the info received from client and updated in database
+- The new content is sent to all clients
+
 ## How to run locally
 - Install NodeJs, MongoDB
 - Download the zip of this repo
